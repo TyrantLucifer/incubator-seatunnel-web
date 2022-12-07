@@ -24,7 +24,10 @@ import org.apache.seatunnel.executor.command.ExecutorCommandArgs;
 
 public class CommandLineUtils {
 
-    private static final String EXECUTOR_SHELL_NAME = "seatunnel-executor.sh";
+    public static final String EXECUTOR_SHELL_NAME = "seatunnel-executor.sh";
+    public static final String SEATUNNEL_STARTER_SHELL_NAME = "seatunnel.sh";
+    public static final String SPARK_STARTER_SHELL_NAME = "start-seatunnel-spark-connector-v2.sh";
+    public static final String FLINK_STARTER_SHELL_NAME = "start-seatunnel-flink-connector-v2.sh";
 
     private CommandLineUtils() {
         throw new UnsupportedOperationException("CommandLineUtils is a utility class and cannot be instantiated");

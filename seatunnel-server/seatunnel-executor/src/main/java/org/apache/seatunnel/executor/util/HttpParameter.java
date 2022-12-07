@@ -15,15 +15,18 @@
  * limitations under the License.
  */
 
-package org.apache.seatunnel.executor;
+package org.apache.seatunnel.executor.util;
 
-import org.apache.seatunnel.executor.command.ExecutorCommandArgs;
-import org.apache.seatunnel.executor.util.CommandLineUtils;
+import lombok.Getter;
 
-public class SeaTunnelExecutor {
-    public static void main(String[] args) {
-        ExecutorCommandArgs executorCommandArgs = CommandLineUtils.parseSeaTunnelExecutorArgs(args);
-        ExecutorStarter executorStarter = new ExecutorStarter(executorCommandArgs);
-        executorStarter.start();
-    }
+import java.io.Serializable;
+
+@Getter
+public class HttpParameter implements Serializable {
+    public static final String RESOURCE_API_SUFFIX = "/api/v1/job/executor/resource";
+    public static final String COMPLETE_API_SUFFIX = "/api/v1/job/executor/complete";
+
+    private final int retry = 3;
+    private final int retryBackoffMultiplierMillis = 100;
+    private final int retryBackoffMaxMillis = 10000;
 }

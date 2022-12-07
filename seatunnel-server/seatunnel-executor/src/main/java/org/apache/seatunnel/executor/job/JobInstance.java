@@ -15,15 +15,26 @@
  * limitations under the License.
  */
 
-package org.apache.seatunnel.executor;
+package org.apache.seatunnel.executor.job;
 
-import org.apache.seatunnel.executor.command.ExecutorCommandArgs;
-import org.apache.seatunnel.executor.util.CommandLineUtils;
+import lombok.Data;
 
-public class SeaTunnelExecutor {
-    public static void main(String[] args) {
-        ExecutorCommandArgs executorCommandArgs = CommandLineUtils.parseSeaTunnelExecutorArgs(args);
-        ExecutorStarter executorStarter = new ExecutorStarter(executorCommandArgs);
-        executorStarter.start();
+@Data
+public class JobInstance {
+    private String jobInstanceId;
+    private String jobConfig;
+    private String engine;
+    private String deployMode;
+    private String master;
+
+    public enum EngineType {
+        SEATUNNEL,
+        SPARK,
+        FLINK;
+    }
+
+    public enum DeployMode {
+        CLIENT,
+        CLUSTER;
     }
 }
