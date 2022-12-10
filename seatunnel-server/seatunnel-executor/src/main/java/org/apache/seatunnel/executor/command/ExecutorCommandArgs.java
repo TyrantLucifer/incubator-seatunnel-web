@@ -28,9 +28,17 @@ public class ExecutorCommandArgs {
         description = "Get job status by JobId")
     private String jobId;
 
+    @Parameter(names = {"-p", "--project-code"},
+        description = "The project code job belonged to")
+    private String projectCode;
+
+    @Parameter(names = {"-t", "--token"},
+        description = "The token of the job")
+    private String token;
+
     @Parameter(names = {"--help"},
-            help = true,
-            description = "Show the usage message")
+        help = true,
+        description = "Show the usage message")
     private boolean help = false;
 
     public String getHost() {
@@ -43,5 +51,13 @@ public class ExecutorCommandArgs {
 
     public boolean isHelp() {
         return help;
+    }
+
+    public String getProjectCode() {
+        return projectCode;
+    }
+
+    public String getToken() {
+        return token;
     }
 }

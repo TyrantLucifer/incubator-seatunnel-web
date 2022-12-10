@@ -15,26 +15,37 @@
  * limitations under the License.
  */
 
-package org.apache.seatunnel.executor.job;
+package org.apache.seatunnel.executor.util;
 
-import lombok.Data;
+import java.io.IOException;
+import java.io.OutputStream;
 
-@Data
-public class JobInstance {
-    private String jobInstanceId;
-    private String jobConfig;
-    private EngineType engine;
-    private DeployMode deployMode = DeployMode.CLIENT;
-    private String master;
+public class MultiOutputStream extends OutputStream {
+    private final OutputStream[] outputStreams;
 
-    public enum EngineType {
-        SEATUNNEL,
-        SPARK,
-        FLINK;
+    public MultiOutputStream(OutputStream... outputStreams) {
+        super();
+        this.outputStreams = outputStreams;
     }
 
-    public enum DeployMode {
-        CLIENT,
-        CLUSTER;
+    @Override
+    public void write(int v) throws IOException {
+        for (OutputStream stream : outputStreams) {
+            stream.write(v);
+        }
+    }
+
+    @Override
+    public void close() throws IOException {
+        for (OutputStream stream : outputStreams) {
+            stream.close();
+        }
+    }
+
+    @Override
+    public void flush() throws IOException {
+        for (OutputStream stream : outputStreams) {
+            stream.flush();
+        }
     }
 }

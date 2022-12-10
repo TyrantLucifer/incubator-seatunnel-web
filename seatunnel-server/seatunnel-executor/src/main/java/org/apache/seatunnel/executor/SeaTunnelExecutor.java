@@ -21,7 +21,7 @@ import org.apache.seatunnel.executor.command.ExecutorCommandArgs;
 import org.apache.seatunnel.executor.util.CommandLineUtils;
 
 public class SeaTunnelExecutor {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ExecutorCommandArgs executorCommandArgs = CommandLineUtils.parseSeaTunnelExecutorArgs(args);
         ExecutorStarter executorStarter = new ExecutorStarter(executorCommandArgs);
         executorStarter.start();

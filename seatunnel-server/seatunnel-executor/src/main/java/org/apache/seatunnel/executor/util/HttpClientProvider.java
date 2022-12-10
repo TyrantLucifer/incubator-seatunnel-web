@@ -36,7 +36,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -48,6 +47,7 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -150,12 +150,10 @@ public class HttpClientProvider implements AutoCloseable {
      * @throws Exception information
      */
     public HttpResponse doGet(String url, Map<String, String> headers, Map<String, String> params) throws Exception {
-        // Create access address
-        URIBuilder uriBuilder = new URIBuilder(url);
         // add parameter to uri
-        addParameters(uriBuilder, params);
+        String uriBuilder = addParameters(url, params);
         // create a new http get
-        HttpGet httpGet = new HttpGet(uriBuilder.build());
+        HttpGet httpGet = new HttpGet(uriBuilder);
         // set default request config
         httpGet.setConfig(REQUEST_CONFIG);
         // set request header
@@ -348,11 +346,17 @@ public class HttpClientProvider implements AutoCloseable {
         return retryer.call(() -> httpClient.execute(request));
     }
 
-    private void addParameters(URIBuilder builder, Map<String, String> params) {
+    private String addParameters(String url, Map<String, String> params) throws URISyntaxException {
         if (Objects.isNull(params) || params.isEmpty()) {
-            return;
+            return url;
         }
-        params.forEach(builder::setParameter);
+        StringBuilder builder = new StringBuilder(url);
+        builder.append("?");
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            builder.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+        }
+        builder.deleteCharAt(builder.length() - 1);
+        return builder.toString();
     }
 
     private void addParameters(HttpEntityEnclosingRequestBase request, Map<String, String> params) throws UnsupportedEncodingException {
