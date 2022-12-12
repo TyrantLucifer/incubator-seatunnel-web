@@ -36,7 +36,7 @@ public class ExecutorCommandArgs {
         description = "The token of the job")
     private String token;
 
-    @Parameter(names = {"--help"},
+    @Parameter(names = {"-h", "--help"},
         help = true,
         description = "Show the usage message")
     private boolean help = false;
