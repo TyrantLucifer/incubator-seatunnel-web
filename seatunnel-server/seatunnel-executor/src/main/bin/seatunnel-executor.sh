@@ -50,6 +50,7 @@ then
     args="-h"
 else
     args=$@
+    args="-t ${ST_WEB_TOKEN} -host ${ST_WEB_HOST} $args"
 fi
 
 set +u
@@ -76,8 +77,6 @@ if [ -e "${CONF_DIR}/log4j2.properties" ]; then
       JAVA_OPTS="${JAVA_OPTS} -Dseatunnel.logs.file_name=seatunnel-executor"
   fi
 fi
-
-args="-t ${ST_WEB_TOKEN} -host ${ST_WEB_HOST} $args"
 
 echo "JAVA_OPTS: ${JAVA_OPTS}"
 
