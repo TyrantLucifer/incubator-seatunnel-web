@@ -17,10 +17,11 @@
 
 package org.apache.seatunnel.executor.util;
 
-import com.beust.jcommander.JCommander;
-import com.beust.jcommander.UnixStyleUsageFormatter;
 import org.apache.seatunnel.core.starter.seatunnel.constant.SeaTunnelConstant;
 import org.apache.seatunnel.executor.command.ExecutorCommandArgs;
+
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.UnixStyleUsageFormatter;
 
 public class CommandLineUtils {
 
