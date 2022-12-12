@@ -39,7 +39,7 @@ CONF_DIR=${APP_DIR}/config
 APP_JAR=${APP_DIR}/starter/seatunnel-executor.jar
 APP_MAIN="org.apache.seatunnel.executor.SeaTunnelExecutor"
 
-export SEATUNNEL_HOME = ${APP_DIR}
+export SEATUNNEL_HOME=${APP_DIR}
 
 if [ -f "${CONF_DIR}/seatunnel-env.sh" ]; then
     . "${CONF_DIR}/seatunnel-env.sh"
