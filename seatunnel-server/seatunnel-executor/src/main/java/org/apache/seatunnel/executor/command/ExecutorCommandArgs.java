@@ -20,7 +20,7 @@ package org.apache.seatunnel.executor.command;
 import com.beust.jcommander.Parameter;
 
 public class ExecutorCommandArgs {
-    @Parameter(names = {"-h", "--host"},
+    @Parameter(names = {"-host", "--host"},
         description = "SeaTunnel Web Service Host")
     private String host;
 

@@ -77,6 +77,8 @@ if [ -e "${CONF_DIR}/log4j2.properties" ]; then
   fi
 fi
 
+args="-t ${ST_WEB_TOKEN} -host ${ST_WEB_HOST} $args"
+
 echo "JAVA_OPTS: ${JAVA_OPTS}"
 
 CLASS_PATH=${APP_DIR}/lib/*:${APP_JAR}
